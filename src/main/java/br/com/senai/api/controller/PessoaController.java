@@ -1,31 +1,62 @@
 package br.com.senai.api.controller;
 
 import br.com.senai.domain.model.Pessoa;
+import br.com.senai.domain.repository.PessoaRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
+@RequestMapping("/pessoas")
 public class PessoaController {
 
-    @GetMapping("/pessoas")
+//    @PersistenceContext
+//    private EntityManager entityManager;
+
+//    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @GetMapping
     public List<Pessoa> listar() {
-        Pessoa pessoa1 = new Pessoa();
-        Pessoa pessoa2 = new Pessoa();
+//        return entityManager.createQuery("FROM Pessoa", Pessoa.class).getResultList();
+        return pessoaRepository.findAll();
+    }
 
-        pessoa1.setId(1L);
-        pessoa1.setNome("Thiago");
-        pessoa1.setEmail("thiagokeiserpetry@gmail.com");
-        pessoa1.setTelefone("47984238681");
+    @GetMapping("/nome/{pessoaNome}")
+    public List<Pessoa> listarPorNome(@PathVariable String pessoaNome) {
+        return pessoaRepository.findByNome(pessoaNome);
+    }
 
-        pessoa2.setId(2L);
-        pessoa2.setNome("Ana");
-        pessoa2.setEmail("ana@gmail.com");
-        pessoa2.setTelefone("47940028922");
+    @GetMapping("/nome/containing/{nomeContaining}")
+    public List<Pessoa> listarNomeContaining(@PathVariable String nomeContaining) {
+        return pessoaRepository.findByNomeContaining(nomeContaining);
+    }
 
-        return Arrays.asList(pessoa1, pessoa2);
+    @GetMapping("{pessoaId}")
+    public ResponseEntity<Pessoa> buscar(@PathVariable Long pessoaId) {
+//        Optional<Pessoa> pessoa = pessoaRepository.findById(pessoaId);
+//
+//        if(pessoa.isPresent()) {
+//            return ResponseEntity.ok(pessoa.get());
+//        }
+//        return ResponseEntity.notFound().build();
+
+        return pessoaRepository.findById(pessoaId)
+                    .map(pessoa -> ResponseEntity.ok(pessoa))
+                    .orElse(ResponseEntity.notFound().build());
+
     }
 }
