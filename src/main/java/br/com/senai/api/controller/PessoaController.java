@@ -5,14 +5,12 @@ import br.com.senai.domain.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +55,33 @@ public class PessoaController {
         return pessoaRepository.findById(pessoaId)
                     .map(pessoa -> ResponseEntity.ok(pessoa))
                     .orElse(ResponseEntity.notFound().build());
+    }
 
+    @PostMapping
+    public Pessoa cadastrar(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
+
+    @PutMapping("/{pessoaId}")
+    public ResponseEntity<Pessoa> editar(@Valid @PathVariable Long pessoaId, @RequestBody Pessoa pessoa) {
+        if(!pessoaRepository.existsById(pessoaId)){
+            return ResponseEntity.notFound().build();
+        }
+
+        pessoa.setId(pessoaId);
+        pessoa = pessoaRepository.save(pessoa);
+
+        return ResponseEntity.ok(pessoa);
+    }
+
+    @DeleteMapping("/{pessoaId}")
+    public  ResponseEntity<Pessoa> remover(@PathVariable Long pessoaId) {
+        if(!pessoaRepository.existsById(pessoaId)){
+            return ResponseEntity.notFound().build();
+        }
+
+        pessoaRepository.deleteById(pessoaId);
+
+        return ResponseEntity.noContent().build();
     }
 }
