@@ -81,8 +81,8 @@ public class PessoaController {
         if(!pessoaRepository.existsById(pessoaId)){
             return ResponseEntity.notFound().build();
         }
-
-        pessoaRepository.deleteById(pessoaId);
+        //pessoaRepository.deleteById(pessoaId);
+        pessoaService.excluir(pessoaId);
 
         return ResponseEntity.noContent().build();
     }
