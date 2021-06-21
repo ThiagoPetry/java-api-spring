@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class EntregaModel {
-
     private Long id;
-    private PessoaModel Pessoa;
+    private PessoaModel remetente;
     private DestinatarioModel destinatario;
     private BigDecimal taxa;
     private StatusEntrega status;

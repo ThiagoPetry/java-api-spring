@@ -28,8 +28,8 @@ public class SolicitacaoEntregaService {
     private EntregaAssembler entregaAssembler;
 
     public Entrega solicitar(Entrega entrega) {
-        Pessoa pessoa = pessoaService.buscar(entrega.getPessoa().getId());
-        entrega.setPessoa(pessoa);
+        Pessoa remetente = pessoaService.buscarRemetente(entrega.getRemetente().getId());
+        entrega.setRemetente(remetente);
 
         entrega.setStatus(StatusEntrega.PENDENTE);
         entrega.setDataPedido(LocalDateTime.now());
