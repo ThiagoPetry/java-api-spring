@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class RemetenteModel {
+public class RemetenteDTO {
 
     private String nome;
     private String email;

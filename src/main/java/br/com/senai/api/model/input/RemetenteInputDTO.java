@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class RemetenteInput {
+public class RemetenteInputDTO {
 
     @NotNull
     private long id;

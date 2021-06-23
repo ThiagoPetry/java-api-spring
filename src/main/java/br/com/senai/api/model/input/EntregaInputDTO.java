@@ -9,15 +9,15 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class EntregaInput {
+public class EntregaInputDTO {
 
     @Valid
     @NotNull
-    private RemetenteInput remetente;
+    private RemetenteInputDTO remetente;
 
     @Valid
     @NotNull
-    private DestinatarioInput destinatario;
+    private DestinatarioInputDTO destinatario;
 
     @NotNull
     private BigDecimal taxa;
