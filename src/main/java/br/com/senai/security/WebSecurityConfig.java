@@ -18,13 +18,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private ImplementsUserDetailsService implementsUserDetailsService;
 
+    private static final String[] AUTH_LIST = {
+      "/",
+      "/pessoas",
+      "/pessoas/{pessoaId}"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.GET, "/entregas").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/pessoas").permitAll()
-                .antMatchers(HttpMethod.POST, "/pessoas").permitAll()
+                .antMatchers(HttpMethod.GET, "/entregas").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, AUTH_LIST).permitAll()
+                .antMatchers(HttpMethod.POST, AUTH_LIST).permitAll()
+                .antMatchers(HttpMethod.PUT, AUTH_LIST).permitAll()
+                .antMatchers(HttpMethod.DELETE, AUTH_LIST).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

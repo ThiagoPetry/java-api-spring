@@ -4,6 +4,7 @@ import br.com.senai.api.assembler.PessoaAssembler;
 import br.com.senai.api.model.PessoaDTO;
 import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Pessoa;
+import br.com.senai.domain.model.Role;
 import br.com.senai.domain.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -63,4 +64,10 @@ public class PessoaService {
         pessoa = pessoaRepository.save(pessoa);
         return pessoa;
     }
+
+//    public Role cadastrarRole(Role role, long pessoaId) {
+//        role.setNomeRole(role.getNomeRole());
+//        role = pessoaRepository.save(role);
+//        return role;
+//    }
 }
