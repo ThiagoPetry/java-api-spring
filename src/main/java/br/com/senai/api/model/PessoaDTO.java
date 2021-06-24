@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class PessoaDTO {
 
+    private long idPessoa;
     private String nomePessoa;
     private UsuarioDTO usuario;
     private String telefonePessoa;
