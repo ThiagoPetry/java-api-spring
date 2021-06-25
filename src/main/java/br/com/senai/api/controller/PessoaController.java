@@ -63,6 +63,7 @@ public class PessoaController {
         }
 
         Pessoa novaPessoa = pessoaAssembler.toEntity(pessoaInput);
+        novaPessoa.getUsuario().setSenha(new BCryptPasswordEncoder().encode(novaPessoa.getUsuario().getSenha()));
         Pessoa pessoa = pessoaService.editarPessoa(novaPessoa, pessoaId);
 
         return pessoaAssembler.toModel(pessoa);

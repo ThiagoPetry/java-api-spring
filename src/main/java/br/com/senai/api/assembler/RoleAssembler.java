@@ -17,7 +17,7 @@ public class RoleAssembler {
 
     private ModelMapper modelMapper;
 
-    public RoleDTO toModel(RoleUsuarios role){
+    public RoleDTO toModel(Role role){
         return modelMapper.map(role, RoleDTO.class);
     }
 

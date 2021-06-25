@@ -20,12 +20,14 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
     private PessoaAssembler pessoaAssembler;
     private RoleService roleService;
+    private RoleUsuarioService roleUsuarioService;
 
     @Transactional
     public void excluir(Long pessoaId) {
         pessoaRepository.deleteById(pessoaId);
     }
 
+    @Transactional
     public Pessoa cadastrarPessoa(Pessoa pessoa) {
 //        boolean emailValidation = pessoaRepository.findByEmail(pessoa.getEmail()).isPresent();
 //
@@ -39,7 +41,7 @@ public class PessoaService {
         novaRole.setUsuarios_id(novaPessoa.getUsuario().getId());
         novaRole.setRole_nome_role("ROLE_USER");
 
-        roleService.cadastrarRole(novaRole);
+        roleUsuarioService.cadastrarRoleUsuario(novaRole);
 
         return novaPessoa;
     }

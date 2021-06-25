@@ -9,5 +9,5 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class RoleDTO {
 
-    private String nome_role;
+    private String nomeRole;
 }
