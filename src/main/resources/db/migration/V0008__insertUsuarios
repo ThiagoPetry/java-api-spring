@@ -1,4 +1,0 @@
-INSERT INTO usuario
-VALUES (null, "thiagokeiserpetry@gmail.com", "$2y$12$p6BsddZOdHV7t6QmATL6J.2HOjTl54icfyG72QpywzKpUxcmYxpP. "),
-(null, "ana@gmail.com", "$2y$12$p6BsddZOdHV7t6QmATL6J.2HOjTl54icfyG72QpywzKpUxcmYxpP. "),
-(null, "julia@gmail.com", "$2y$12$p6BsddZOdHV7t6QmATL6J.2HOjTl54icfyG72QpywzKpUxcmYxpP. ");
